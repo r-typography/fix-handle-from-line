@@ -10,7 +10,7 @@
 #
 #
 ###########################################################################################################
-
+import math
 import objc
 from GlyphsApp import *
 from GlyphsApp.plugins import *
