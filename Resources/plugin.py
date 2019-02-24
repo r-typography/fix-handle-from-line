@@ -10,23 +10,21 @@
 #
 #
 ###########################################################################################################
-import math
+
 import objc
 from GlyphsApp import *
 from GlyphsApp.plugins import *
+import math
 
 class FixHandleFromLine(FilterWithoutDialog):
 	
 	def settings(self):
-		self.menuName = Glyphs.localize({'en': u'FixHandleFromLine', 'de': u'FixHandleFromLine'})
+		self.menuName = Glyphs.localize({'en': u'Fix Handle From Line', 'de': u'Fix Handle From Line'})
 		self.keyboardShortcut = None # With Cmd+Shift
 
 	def filter(self, layer, inEditView, customParameters):
 		
 		# Apply your filter code here
-		
-
-
 		myLayers = Glyphs.font.selectedLayers
 		for thisLayer in myLayers:
 			for contour in thisLayer.paths:
@@ -92,9 +90,7 @@ class FixHandleFromLine(FilterWithoutDialog):
 								contour.nodes[n-1].x = contour.nodes[n].x + abs(AHnew)
 							if AR < 0:	
 								contour.nodes[n-1].y = contour.nodes[n].y + abs(BHnew)
-
 		
-
 		
 		print layer, inEditView, customParameters
 	

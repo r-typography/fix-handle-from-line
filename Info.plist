@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Fix Handle From Line</string>
+	<string>FixHandleFromLine</string>
 	<key>CFBundleExecutable</key>
 	<string>plugin</string>
 	<key>CFBundleIdentifier</key>
@@ -13,19 +13,19 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Fix Handle From Line</string>
+	<string>FixHandleFromLine</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>2.0.0</string>
 	<key>UpdateFeedURL</key>
 	<string>https://raw.githubusercontent.com/r-typography/fix-handle-from-line/blob/master/Info.plist</string>
 	<key>productPageURL</key>
 	<string>https://github.com/r-typography/fix-handle-from-line</string>
 	<key>productReleaseNotes</key>
-	<string>PlugIn for glyphs</string>
+	<key>productReleaseNotes</key>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright, RTypography, 2019</string>
 	<key>NSPrincipalClass</key>
