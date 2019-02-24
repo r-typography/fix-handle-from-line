@@ -21,9 +21,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
 	<key>UpdateFeedURL</key>
-	<string>____OnlineUrlToThisPlist____</string>
+	<string>https://raw.githubusercontent.com/r-typography/fix-handle-from-line/blob/master/Info.plist</string>
 	<key>productPageURL</key>
-	<string>____ProductPageURL____</string>
+	<string>https://github.com/r-typography/fix-handle-from-line</string>
 	<key>productReleaseNotes</key>
 	<string>PlugIn for glyphs</string>
 	<key>NSHumanReadableCopyright</key>
