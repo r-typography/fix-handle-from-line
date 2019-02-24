@@ -15,10 +15,10 @@ import objc
 from GlyphsApp import *
 from GlyphsApp.plugins import *
 
-class ____PluginClassName____(FilterWithoutDialog):
+class FixHandleFromLine(FilterWithoutDialog):
 	
 	def settings(self):
-		self.menuName = Glyphs.localize({'en': u'My Filter', 'de': u'Mein Filter'})
+		self.menuName = Glyphs.localize({'en': u'FixHandleFromLine', 'de': u'FixHandleFromLine'})
 		self.keyboardShortcut = None # With Cmd+Shift
 
 	def filter(self, layer, inEditView, customParameters):
