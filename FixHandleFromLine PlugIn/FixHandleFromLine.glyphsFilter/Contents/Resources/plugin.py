@@ -59,7 +59,7 @@ class FixHandleFromLine(FilterWithoutDialog):
 						if AR < 0:	
 							contour.nodes[n+1].y = contour.nodes[n].y + abs(BHnew)*-1
 						
-				#urve to line
+				#Curve to line
 				if contour.nodes[n-1].type == "offcurve" and contour.nodes[n].type == "curve" and contour.nodes[n+1].type == "line" and contour.nodes[n].connection == 100 :
 	
 					#calcular hipotenusa e angulo da recta
