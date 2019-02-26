@@ -3,6 +3,6 @@ Makes angles of handles the same as the lines that precede or come after them. G
 It Only changes the handle if:
 1. the line that precedes or comes after it is not vertical or horizontal
 2. the line that precedes or comes after it is longer than 75% of the handle's lenght
-3. the angle of the handle differs in less then 3° from the angle of the line
+3. The node with the handle must be "round"
 
 Only changes BCP's. Doesn't change nodes.
