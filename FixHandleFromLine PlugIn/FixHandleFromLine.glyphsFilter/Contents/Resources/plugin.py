@@ -30,7 +30,7 @@ class FixHandleFromLine(FilterWithoutDialog):
 			for n in range(-1,numeroDePontos-1):
 								
 				#line to Curve
-				if contour.nodes[n+1].type == "offcurve" and contour.nodes[n].type == "line" :
+				if contour.nodes[n+1].type == "offcurve" and contour.nodes[n].type == "line" and contour.nodes[n].connection == 100 :
 	
 					#calcular hipotenusa e angulo da recta
 					AR = (contour.nodes[n].y - contour.nodes[n-1].y)
@@ -49,7 +49,7 @@ class FixHandleFromLine(FilterWithoutDialog):
 					BHnew = math.sin(math.radians(AngleRecta))*HypotHandle
     				
 					#CorrigirPonto
-					if abs(HypotRecta) > abs(HypotHandle)*0.75 and abs(AngleHandle - AngleRecta) < 3 :
+					if abs(HypotRecta) > abs(HypotHandle)*0.75 :
 						if BR > 0:
 							contour.nodes[n+1].x = contour.nodes[n].x + abs(AHnew)
 						if AR > 0:	
@@ -60,7 +60,7 @@ class FixHandleFromLine(FilterWithoutDialog):
 							contour.nodes[n+1].y = contour.nodes[n].y + abs(BHnew)*-1
 						
 				#urve to line
-				if contour.nodes[n-1].type == "offcurve" and contour.nodes[n].type == "curve" and contour.nodes[n+1].type == "line" :
+				if contour.nodes[n-1].type == "offcurve" and contour.nodes[n].type == "curve" and contour.nodes[n+1].type == "line" and contour.nodes[n].connection == 100 :
 	
 					#calcular hipotenusa e angulo da recta
 					AR = (contour.nodes[n+1].y - contour.nodes[n].y)
@@ -79,7 +79,7 @@ class FixHandleFromLine(FilterWithoutDialog):
 					BHnew = math.sin(math.radians(AngleRecta))*HypotHandle
     				
 					#CorrigirPonto
-					if abs(HypotRecta) > abs(HypotHandle)*0.75 and abs(AngleHandle - AngleRecta) < 3 :
+					if abs(HypotRecta) > abs(HypotHandle)*0.75 :
 						if BR > 0:
 							contour.nodes[n-1].x = contour.nodes[n].x + abs(AHnew)*-1
 						if AR > 0:	
