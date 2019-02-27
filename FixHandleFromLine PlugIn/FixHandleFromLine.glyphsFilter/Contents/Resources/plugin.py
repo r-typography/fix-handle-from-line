@@ -30,64 +30,67 @@ class FixHandleFromLine(FilterWithoutDialog):
 			for n in range(-1,numeroDePontos-1):
 								
 				#line to Curve
-				if contour.nodes[n+1].type == "offcurve" and contour.nodes[n].type == "line" and contour.nodes[n].connection == 100 :
-	
-					#calcular hipotenusa e angulo da recta
-					AR = (contour.nodes[n].y - contour.nodes[n-1].y)
-					BR = (contour.nodes[n].x - contour.nodes[n-1].x)
-					HypotRecta = math.hypot(AR, BR)
-					AngleRecta = math.degrees(math.asin(AR / HypotRecta))               
+				if contour.nodes[n+1].type == "offcurve" and contour.nodes[n].type == "line":			
+				#calcular hipotenusa e angulo da recta
+					AR = (contour.nodes[n].x - contour.nodes[n-1].x)
+					BR = (contour.nodes[n].y - contour.nodes[n-1].y)				
+					HypotRecta = math.hypot(BR, AR)
+					AngleRecta = 0
+					if AR >= 0 and BR > 0:
+						AngleRecta = math.degrees(math.asin(BR / HypotRecta))
+					if AR < 0 :
+						AngleRecta = math.degrees(math.asin(BR / HypotRecta))*-1+180	
+					if AR >= 0 and BR < 0:
+						AngleRecta = math.degrees(math.asin(BR / HypotRecta))+360						
+				#calcular hipotenusa e angulo do Handle
+					AH = (contour.nodes[n+1].x - contour.nodes[n].x)
+					BH = (contour.nodes[n+1].y - contour.nodes[n].y)
+					HypotHandle = math.hypot(BH, AH)
+					AngleHandle = 0
+					if AH >= 0 and BH > 0:
+						AngleHandle = math.degrees(math.asin(BH / HypotHandle))
+					if AH < 0 :
+						AngleHandle = math.degrees(math.asin(BH / HypotHandle))*-1+180	
+					if AH >= 0 and BH < 0:
+						AngleHandle = math.degrees(math.asin(BH / HypotHandle))+360
 					
-					#calcular hipotenusa e angulo do Handle
-					AH = (contour.nodes[n+1].y - contour.nodes[n].y)
-					BH = (contour.nodes[n+1].x - contour.nodes[n].x)
-					HypotHandle = math.hypot(AH, BH)
-					AngleHandle = math.degrees(math.asin(AH / HypotHandle))  
+				#CorrigirPonto
+					if abs(HypotRecta) > abs(HypotHandle)*0.75:
+						if AngleRecta - AngleHandle > 355 and AngleRecta - AngleHandle < 360 or abs(AngleRecta - AngleHandle) < 5 or contour.nodes[n].connection == 100 :
+							contour.nodes[n+1].x = contour.nodes[n].x + math.cos(math.radians(AngleRecta))*HypotHandle
+							contour.nodes[n+1].y = contour.nodes[n].y + math.sin(math.radians(AngleRecta))*HypotHandle
+				
+				#Curve to Line
+				if contour.nodes[n-1].type == "offcurve" and contour.nodes[n].type == "curve" and contour.nodes[n+1].type == "line":
+				#calcular hipotenusa e angulo da recta
+					AR = (contour.nodes[n].x - contour.nodes[n+1].x)
+					BR = (contour.nodes[n].y - contour.nodes[n+1].y)				
+					HypotRecta = math.hypot(BR, AR)
+					AngleRecta = 0
+					if AR >= 0 and BR > 0:
+						AngleRecta = math.degrees(math.asin(BR / HypotRecta))
+					if AR < 0 :
+						AngleRecta = math.degrees(math.asin(BR / HypotRecta))*-1+180	
+					if AR >= 0 and BR < 0:
+						AngleRecta = math.degrees(math.asin(BR / HypotRecta))+360						
+				#calcular hipotenusa e angulo do Handle
+					AH = (contour.nodes[n-1].x - contour.nodes[n].x)
+					BH = (contour.nodes[n-1].y - contour.nodes[n].y)
+					HypotHandle = math.hypot(BH, AH)
+					AngleHandle = 0
+					if AH >= 0 and BH > 0:
+						AngleHandle = math.degrees(math.asin(BH / HypotHandle))
+					if AH < 0 :
+						AngleHandle = math.degrees(math.asin(BH / HypotHandle))*-1+180	
+					if AH >= 0 and BH < 0:
+						AngleHandle = math.degrees(math.asin(BH / HypotHandle))+360
 					
-					#calcular lados corrigidos do tiangulo do Handle
-					AHnew = math.cos(math.radians(AngleRecta))*HypotHandle
-					BHnew = math.sin(math.radians(AngleRecta))*HypotHandle
-    				
-					#CorrigirPonto
-					if abs(HypotRecta) > abs(HypotHandle)*0.75 :
-						if BR > 0:
-							contour.nodes[n+1].x = contour.nodes[n].x + abs(AHnew)
-						if AR > 0:	
-							contour.nodes[n+1].y = contour.nodes[n].y + abs(BHnew)
-						if BR < 0:
-							contour.nodes[n+1].x = contour.nodes[n].x + abs(AHnew)*-1
-						if AR < 0:	
-							contour.nodes[n+1].y = contour.nodes[n].y + abs(BHnew)*-1
+				#CorrigirPonto
+					if abs(HypotRecta) > abs(HypotHandle)*0.75:
+						if AngleRecta - AngleHandle > 355 and AngleRecta - AngleHandle < 360 or abs(AngleRecta - AngleHandle) < 5 or contour.nodes[n].connection == 100 :
+							contour.nodes[n-1].x = contour.nodes[n].x + math.cos(math.radians(AngleRecta))*HypotHandle
+							contour.nodes[n-1].y = contour.nodes[n].y + math.sin(math.radians(AngleRecta))*HypotHandle
 						
-				#urve to line
-				if contour.nodes[n-1].type == "offcurve" and contour.nodes[n].type == "curve" and contour.nodes[n+1].type == "line" and contour.nodes[n].connection == 100 :
-	
-					#calcular hipotenusa e angulo da recta
-					AR = (contour.nodes[n+1].y - contour.nodes[n].y)
-					BR = (contour.nodes[n+1].x - contour.nodes[n].x)
-					HypotRecta = math.hypot(AR, BR)
-					AngleRecta = math.degrees(math.asin(AR / HypotRecta))               
-					
-					#calcular hipotenusa e angulo do Handle
-					AH = (contour.nodes[n].y - contour.nodes[n-1].y)
-					BH = (contour.nodes[n].x - contour.nodes[n-1].x)
-					HypotHandle = math.hypot(AH, BH)
-					AngleHandle = math.degrees(math.asin(AH / HypotHandle))  
-					
-					#calcular lados corrigidos do tiangulo do Handle
-					AHnew = math.cos(math.radians(AngleRecta))*HypotHandle
-					BHnew = math.sin(math.radians(AngleRecta))*HypotHandle
-    				
-					#CorrigirPonto
-					if abs(HypotRecta) > abs(HypotHandle)*0.75 :
-						if BR > 0:
-							contour.nodes[n-1].x = contour.nodes[n].x + abs(AHnew)*-1
-						if AR > 0:	
-							contour.nodes[n-1].y = contour.nodes[n].y + abs(BHnew)*-1
-						if BR < 0:
-							contour.nodes[n-1].x = contour.nodes[n].x + abs(AHnew)
-						if AR < 0:	
-							contour.nodes[n-1].y = contour.nodes[n].y + abs(BHnew)
 		
 		
 		print layer, inEditView, customParameters
