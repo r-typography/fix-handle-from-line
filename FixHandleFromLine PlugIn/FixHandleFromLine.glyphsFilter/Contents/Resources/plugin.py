@@ -92,7 +92,7 @@ class FixHandleFromLine(FilterWithoutDialog):
 							contour.nodes[n-1].x = contour.nodes[n].x + math.cos(math.radians(AngleRecta))*HypotHandle
 							contour.nodes[n-1].y = contour.nodes[n].y + math.sin(math.radians(AngleRecta))*HypotHandle
 
-		print(layer, inEditView, customParameters)
+		# print(layer, inEditView, customParameters) # DEBUG
 
 	@objc.python_method
 	def __file__(self):
